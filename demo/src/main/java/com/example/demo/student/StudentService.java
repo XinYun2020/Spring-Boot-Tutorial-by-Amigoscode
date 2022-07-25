@@ -41,4 +41,34 @@ public class StudentService {
         }
         studentRepository.deleteById(studentId);
     }
+
+    @Transactional
+    // we are not using any queries
+    // @Transactional => the entity goes into management state (JDA)
+    public void updateStudent(Long studentId, String name, String email) {
+        // checking if student exists
+        Student student = studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException(
+                    "Student Id " + studentId + " does not exists. "));
+
+        // name guard
+        if(name != null &&
+            name.length() > 0 &&
+            !Objects.equals(student.getName(), name)) {
+            student.setName(name);
+        }
+
+        // email guard
+        if(email != null &&
+            email.length() > 0  &&
+            !Objects.equals(student.getEmail(), email)) {
+            Optional<Student> studentOptional =
+                    studentRepository.findStudentByEmail(email);
+
+        // check if the email been taken
+        if (studentOptional.isPresent()) {
+            throw new IllegalStateException("email taken");
+        }
+        student.setEmail(email);
+        }
+    }
 }
