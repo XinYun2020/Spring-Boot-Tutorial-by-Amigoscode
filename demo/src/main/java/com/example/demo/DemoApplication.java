@@ -14,8 +14,16 @@ public class DemoApplication {
     // Get sth out of our server
     // current rest endpoint
 	@GetMapping
-	public List<String> hello() {
-	    return List.of("Hello", "World");   // will receive JSON back
+	public List<Student> hello() {
+	    return List.of(
+	        new Student(
+	            1L,
+	            "Mariam",
+	            "mariam.jamal@gmail.com",
+	            LocalDate.of(2000,Month.January,5),
+	            21
+	        )
+	    );   // Class will be convered into JSON object
 	}
 
 }
