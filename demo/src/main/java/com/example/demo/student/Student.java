@@ -1,6 +1,22 @@
 package com.example.demo.student;
 
-public class Student {
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.Period;
+
+@Entity     // @Entity for hibernate 冬眠的@实体
+@Table
+public class Student {      // Make student class to a table in our database
+    @Id
+    @SequenceGenerator(
+            name = "student_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE, // default for postgres is sequence
+            generator = "student_sequence"      // generator is the sequence we just created
+    )
     private Long id;
     private String name;
     private String email;
