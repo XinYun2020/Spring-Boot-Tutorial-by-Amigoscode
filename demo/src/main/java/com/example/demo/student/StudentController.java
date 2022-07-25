@@ -20,7 +20,10 @@ public class StudentController {
         return studentService.getStudents();    // use the method in StudentService
     }
 
-
+    @PostMapping    // Actions for URL => Open in HTTP client => generated-requests.http
+    public void registerNewStudent(@RequestBody Student student) {  // take the requestbody and map to a student
+        studentService.addNewStudent(student);   // invoke service => press option+enter to create a method inside of Service Class
+    }
 
 }
 

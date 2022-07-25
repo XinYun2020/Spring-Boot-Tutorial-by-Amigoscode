@@ -24,4 +24,7 @@ public class StudentService {
         return studentRepository.findAll(); // all avaliable method (Spring Data JPA)
     }
 
+    public void addNewStudent(Student student) {
+
+    }
 }
