@@ -22,8 +22,20 @@ public class StudentController {
 
     @PostMapping    // Actions for URL => Open in HTTP client => generated-requests.http
     public void registerNewStudent(@RequestBody Student student) {  // take the requestbody and map to a student
-        studentService.addNewStudent(student);   // invoke service => press option+enter to create a method inside of Service Class
+        studentService.addNewStudent(student);  // invoke service => press option+enter to create a method inside of Service Class
     }
 
+    @DeleteMapping(path = "{studentId}")        // with path of studentId
+    public void deleteStudent(@PathVariable("studentId") Long studentId) {
+        studentService.deleteStudent(studentId);
+    }
+
+    @PutMapping(path = "{studentId}")
+    public void updateStudent(
+            @PathVariable("studentId") Long studentId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email) {
+        studentService.updateStudent(studentId, name, email);
+    }
 }
 
