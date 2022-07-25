@@ -5,20 +5,16 @@ package com.example.demo.student;
 public class StudentController {
     private final StudentService studentService;
 
-    // Get sth out of our server
-    // current rest endpoint
-	@GetMapping
-	public List<Student> hello() {
-	    return List.of(
-	        new Student(
-	            1L,
-	            "Mariam",
-	            "mariam.jamal@gmail.com",
-	            LocalDate.of(2000,Month.January,5),
-	            21
-	        )
-	    );   // Class will be convered into JSON object
-	}
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    @GetMapping
+    public List<Student> getStudent() {
+        return studentService.getStudents();    // use the method in StudentService
+    }
+
+
 
 }
 
